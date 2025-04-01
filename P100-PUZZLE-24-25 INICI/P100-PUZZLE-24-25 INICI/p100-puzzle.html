@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle Laboratori</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+ <!-- Formulari selecciona la imatge i el número de peces del puzle.  -->
+
+  <div id="form-menu">
+    <h1>Escull una Imatge</h1>
+    <div id="grid">
+      <div>
+        <img src="imatges/img-2.jpg" width="100" height="100" input type="button"/>
+      </div>
+      <div>
+        <img src="imatges/img-3.jpg" width="100" height="100" input type="button"/>   
+      </div>
+      <div>
+        <img src="imatges/img-4.jpg" width="100" height="100" input type="button"/>   
+      </div>
+      <div>
+        <img src="imatges/img-5.jpg" width="100" height="100" input type="button" />   
+      </div>
+  </div>
+    
+    <footer>
+      <h1>Escull el nombre de files i columnes</h1>
+      <label for="filas">files = </label>
+      <input type="number" id="filas" value="">
+      
+      <label for="columnas"> columnas = </label>
+      <input type="number" id="columnas" value="">
+      <p><input type="button" value="JUGAR" id="jugar"/></p>
+    </footer>
+  </div>
+
+  <div id="form-joc" style="display:none;">
+    <p style="text-align: center;"><input type="button" value="Tornar a jugar" id="nouPuzzle" /></p>
+      <div id="marc-puzzle">
+        <div id="solucio"></div>
+        <div id="peces-puzzle">
+            <div id="f1c1" class="peca"></div><div id="f1c2" class="peca"></div>
+            <div id="f2c1" class="peca"></div><div id="f2c2" class="peca"></div>            
+        </div>
+        <div id="felicitacio" style="display:none;">
+          <h1> Felicitats!!<br />Fes clic al botó per tornar a jugar</h1>
+        </div>
+      </div>
+      <p style="text-align: center;"><input type="button" value="Resol el Puzzle" id="resolPuzzle" /></p>
+
+
+  </div>
+ 
+
+  <div id="imatges" style="display:none;">
+    <img id="p-img-2" src="imatges/img-2.jpg" width="800" height="800"/>   
+  </div>
+
+ <script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/p100-puzzle.js"></script>
+    
+</body>
+</html>

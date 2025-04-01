@@ -8,22 +8,17 @@ body{
 }
 
 #grid{
+    width:100%;
     display: grid;
-    grid-template-columns: repeat(2, 200px);
-    grid-template-rows: repeat(2, 200px);    
+    grid-template-columns: repeat(2, 300px);
     gap: 10px;
-    justify-content: center;
     margin-top: 20px;
-
-
+    justify-content: center;
 }
 #form-menu img{
-    width: 200px;
+    width: 300px;
     height: 200px;
     background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border: 2px solid black;
     overflow: hidden;
    

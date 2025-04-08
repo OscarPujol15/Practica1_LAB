@@ -1,4 +1,3 @@
-
 var numFiles = 2;
 var numColumnes = 2;
 var nomImatge = "img-2";
@@ -21,6 +20,8 @@ $(document).ready(function(){
    
     //Comença el joc
     $("#jugar").on("click",function(){
+        $("#form-menu").hide();
+        $("#form-joc").show();
         creaPuzzle();
         $(".peca")
         .mousedown(function(){
@@ -211,4 +212,5 @@ function distanciaDosPunts(puntA, puntB){
     *  
     */ 
 }
+
 

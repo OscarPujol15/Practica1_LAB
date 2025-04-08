@@ -146,6 +146,11 @@ function posicionaPeca(peca){
     * 
     *  
     */ 
+    //1. extraer x e y de fxcy
+    let x=Number.parseInt(peca.at(1));
+    let y=Number.parseInt(peca.at(3));
+    //2. calcular posicion segun la cantidad de col y fil que hay
+    let posicioPecaCorrecte=y/numColumnes
     
     if (distanciaDosPunts(posicioPeca, posicioPecaCorrecte)<10){      
         /**TASCA *****************************

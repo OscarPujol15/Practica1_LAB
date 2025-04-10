@@ -60,6 +60,17 @@ $(document).ready(function(){
         */ 
         resolPuzzle();
     });
+
+    $("#nouPuzzle").on("click", function() {
+        $("#form-joc").hide();
+        $("#form-menu").show();
+    });
+
+    $(".boto-imatge").on("click", function() {
+        nomImatge = $(this).data("nom");
+        $("#grid img").removeClass("seleccionada");
+        $(this).addClass("seleccionada");
+    });
    
 });
 
@@ -141,41 +152,46 @@ function setImatgePosicioPeces(){
 *  
 */   
 
-function posicionaPeca(peca){
+function posicionaPeca(peca) {
+    let id = peca.attr("id"); // Ex: "f0c1"
+    let fila = parseInt(id.charAt(1));
+    let columna = parseInt(id.charAt(3));
 
-    let posicioPeca = peca.position();
-    let fila = parseInt(posicioPeca.CharAt(1));
-    let columna = parseInt(posicioPeca.CharAt(3));
+    let posicioCorrecte = {
+        left: columna * ampladaPeca,
+        top: fila * alcadaPeca
+    };
 
-    let posicioPecaCorrecte = (
-        X = fila*ampladaPeca,
-        Y = columna*alçadaPeca
-    )
-
-    /**TASCA *****************************
+     /**TASCA *****************************
     * 1.- Identifica la peça pel seu id (fxcy) i en calcula la
     * seva posició correcte  (posicioPecaCorrecte) 
     * 
     *  
     */ 
-    
-    if (distanciaDosPunts(posicioPeca, posicioPecaCorrecte)<10){  
-        
+
+    let posicioActual = peca.position(); // Potser s'hauria d'usar .offset()
+
+    if (distanciaDosPunts(posicioActual, posicioCorrecte) < 10) {
         peca.animate({
-            X: posicioPecaCorrecte.X,
-            Y: posicioPecaCorrecte.Y
-        }), 200, function(){peca.draggable("disable")}
-        
-        /**TASCA *****************************
+            left: posicioCorrecte.left,
+            top: posicioCorrecte.top
+        }, 200, function() {
+            peca.draggable("disable");
+            
+        });
+    }
+
+    /**TASCA *****************************
         * 2.- Si la distancia és dins del marge determinat
         * mou la peça a la seva posició correcta
         *
         *  La peça ja no és podrà tornar a moure
         *  
         */ 
-    }
-
 }
+
+    
+
 
 /**
 * Posa totes les peces al seu lloc correcte
@@ -184,16 +200,23 @@ function posicionaPeca(peca){
 * @return 
 */
 function resolPuzzle(){
-    $("#resolPuzzle").on("click",function(){
-        for (let i =0; i<numFiles; i++){
-            for (let j =0; j<numColumnes; j++){
-                peca.animate({
-                    X: posicioPecaCorrecte.X,
-                    Y: posicioPecaCorrecte.Y
-                }), 200, function(){peca.draggable("disable")})
-            }
+    for (let fila = 0; fila < numFiles; fila++) {
+        for (let columna = 0; columna < numColumnes; columna++) {
+            let peca = $("#f" + fila + "c" + columna);
+            let posicioCorrecte = {
+                left: columna * ampladaPeca,
+                top: fila * alcadaPeca
+            };
+
+            peca.animate({
+                left: posicioCorrecte.left,
+                top: posicioCorrecte.top
+            }, 200, function(){
+                peca.draggable("disable");
+            });
         }
     }
+}
     
     /**TASCA *****************************
     * 4.- Posiciona totes les peces a la 
@@ -207,6 +230,22 @@ function resolPuzzle(){
 * @return bool (true si totes les peces son al seu lloc)
 */
 function puzzleResolt(){
+    for (let fila = 0; fila < numFiles; fila++) {
+        for (let columna = 0; columna < numColumnes; columna++) {
+            let peca = $("#f" + fila + "c" + columna);
+            let pos = peca.position();
+            let posCorrecte = {
+                left: columna * ampladaPeca,
+                top: fila * alcadaPeca
+            };
+
+            if (distanciaDosPunts(pos, posCorrecte) >= 10) {
+                return false;
+            }
+        }
+    }
+    return true;
+
     /**TASCA *****************************
     * 5.- Revisa totes les peces i les seves posicions actuals i compara
     * aquestes poscions amb les posicions correctes que haurien de tenir
@@ -225,10 +264,10 @@ function puzzleResolt(){
 * @return Distancia entre els dos punts en un pla cartesià
 */
 function distanciaDosPunts(puntA, puntB){
-    let dx = puntA.X-puntB.X
-    let dy = puntA.Y-puntB.Y
+    let dx = puntA.left-puntB.left
+    let dy = puntA.top-puntB.top
 
-    return Math.sqrt(dx**2 + dy**2)
+    return Math.sqrt(dx*dx + dy*dy)
 
    /**TASCA *****************************
     * 3.- Reviseu la fórmula de càlcul de distància entre dos punts

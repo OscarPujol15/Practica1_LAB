@@ -31,11 +31,10 @@
     
     <footer>
       <h1>Escull el nombre de files i columnes</h1>
-      <label for="filas">files = </label>
-      <input type="number" id="filas" value="">
       
-      <label for="columnas"> columnas = </label>
-      <input type="number" id="columnas" value="">
+      
+      <P>files = <input id="files" class="mfiles" type="number" min="2" max="6"value="2"> </P>
+      <P>columnes = <input id="cols" class="mcols"type="number" min="2" max="6" value="2"> </P>
       <p><input type="button" value="JUGAR" id="jugar"/></p>
     </footer>
   </div>
@@ -59,10 +58,15 @@
  
 
   <div id="imatges" style="display:none;">
-    <img id="p-img-2" src="imatges/img-2.jpg" width="800" height="800"/>   
+    <img id="p-img-2" src="imatges/img-2.jpg" width="800" height="800"/> 
+    <img id="p-img-3" src="imatges/img-3.jpg" width="1000" height="527"/>   
+    <img id="p-img-4" src="imatges/img-4.jpg" width="1000" height="600"/>   
+    <img id="p-img-5" src="imatges/img-5.jpg" width="1000" height="643"/>   
+
   </div>
   
   <audio id="so-clic" src="so/click.mp3" preload="auto"></audio>
+  <audio id="so-victoria" src="so/victoria.mp3" preload="auto"></audio>
 
  <script src="js/jquery-3.6.0.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>

@@ -21,6 +21,9 @@ $(document).ready(function(){
    
     //Comença el joc
     $("#jugar").on("click",function(){
+        numFiles = parseInt($("#files").val());
+        numColumnes = parseInt($("#cols").val());
+
         $("#form-menu").hide();
         $("#form-joc").show();
         creaPuzzle();
@@ -44,6 +47,9 @@ $(document).ready(function(){
             */ 
             if(puzzleResolt()){
                 $("#felicitacio").show();
+                let audio = document.getElementById("so-victoria");
+                audio.currentTime = 0;
+                audio.play()
                 /**TASCA *****************************
                 * 6.- Codi que mostra la felicitació si puzzleResolt = true
                 * És valora alguna animació o efecte
@@ -67,7 +73,7 @@ $(document).ready(function(){
     });
 
     $(".boto-imatge").on("click", function() {
-        nomImatge = $(this).data("nom");
+        nomImatge = $(this).attr("data-nom");
         $("#grid img").removeClass("seleccionada");
         $(this).addClass("seleccionada");
     });
@@ -172,12 +178,17 @@ function posicionaPeca(peca) {
     let posicioActual = peca.position(); // Potser s'hauria d'usar .offset()
 
     if (distanciaDosPunts(posicioActual, posicioCorrecte) < 10) {
+
+        let audio = document.getElementById("so-clic");
+        audio.currentTime = 0;
+        audio.play();
+
         peca.animate({
             left: posicioCorrecte.left,
             top: posicioCorrecte.top
         }, 200, function() {
             peca.draggable("disable");
-            
+            peca.css("z-index", 0);
         });
     }
 
